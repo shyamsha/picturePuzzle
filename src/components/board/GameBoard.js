@@ -3,21 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { GameContext } from "../../store/GameContext";
 import { useWindowSize } from "@react-hook/window-size";
 import BoardAction from "./BoardAction";
-import { BsPauseBtn, BsPlayCircle } from "react-icons/bs";
 
 /**
  * Renders the puzzle board containing all the puzzle pieces
- * @returns {JSX.Element|null}
- * @constructor
  */
 const GameBoard = () => {
-  /**
-   * @type {import('../../store/GameContext').GameContextType}
-   */
-  const { board, game, start, togglePause, size } = useContext(GameContext);
+  const { board, game, start, size } = useContext(GameContext);
 
   /**
-   * @type {[number, number]} dimensions of the browser window
+   dimensions of the browser window
    */
   const [windowWidth, windowHeight] = useWindowSize();
 
@@ -25,7 +19,7 @@ const GameBoard = () => {
    * The cellSize, in pixels, is calculated based on the browser window size and the number of columns and row
    * that the puzzle has.
    */
-  const [cellSize, setCellSize] = useState(/** @type {?number}*/ null);
+  const [cellSize, setCellSize] = useState(null);
 
   // calculates the optimal cellSize for the puzzle to be as large as possible while still fitting
   // inside the browser window
@@ -69,17 +63,7 @@ const GameBoard = () => {
           ))}
         {!game.startTime && (
           // render the overlay with the "Start" button when game is not yet started
-          <BoardAction onClick={start}>
-            Click Here to Play
-            <BsPlayCircle className="text-5xl" />
-          </BoardAction>
-        )}
-        {!!game.pauseTime && (
-          // render the "Resume" button is the game is paused
-          <BoardAction onClick={togglePause}>
-            Resume Game Pause
-            <BsPauseBtn className="text-5xl" />
-          </BoardAction>
+          <BoardAction onClick={start}>Click Here to Play</BoardAction>
         )}
       </div>
     </div>

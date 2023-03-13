@@ -7,12 +7,12 @@ import GameControls from "../components/controls/GameControls";
  * @constructor
  */
 const GameScreen = () => {
-    return (
-        <>
-            <GameBoard />
-            <GameControls />
-        </>
-    );
-}
+  return (
+    <>
+      <GameBoard />
+      <GameControls />
+    </>
+  );
+};
 
 export default GameScreen;

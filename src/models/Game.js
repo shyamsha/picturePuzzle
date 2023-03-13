@@ -4,18 +4,9 @@ import PuzzlePiece from "./PuzzlePiece";
  * The Game handles the logic of the puzzle
  */
 class Game {
-  /**
-   * @param {{x: number, y: number}} size - number of rows and columns of the puzzle
-   */
   constructor({ size = { x: 3, y: 3 } }) {
-    /**
-     * @type {{x: number, y: number}} number of rows and columns of the puzzle
-     */
     this.size = size;
 
-    /**
-     * @type {PuzzlePiece[]} contains all the pieces of the puzzle
-     */
     this.puzzle = [];
     [...Array(size.x).keys()].forEach((x) => {
       [...Array(size.y).keys()].forEach((y) => {
@@ -24,37 +15,37 @@ class Game {
     });
 
     /**
-     * @type {?number} time the game started as milliseconds timestamp
+    time the game started as milliseconds timestamp
      */
     this.startTime = null;
 
     /**
-     * @type {?number} time the game was paused as milliseconds timestamp
+    time the game was paused as milliseconds timestamp
      */
     this.pauseTime = null;
 
     /**
-     * @type {?number} time the game was finished as milliseconds timestamp
+    time the game was finished as milliseconds timestamp
      */
     this.endTime = null;
 
     /**
-     * @type {?{x: number, y: number}[]} list of moves that where made during the game
+     list of moves that where made during the game
      */
     this.moves = null;
 
     /**
-     * @type {?{x: number, y: number}} position of the piece that was removed when the game starts
+     position of the piece that was removed when the game starts
      */
     this.removedPiece = null;
 
     /**
-     * @type {?{x: number, y: number}} current position of the empty slot in the puzzle
+     current position of the empty slot in the puzzle
      */
     this.slot = null;
 
     /**
-     * @type {boolean} flag to indicate that the game is finished
+     flag to indicate that the game is finished
      */
     this.gameWon = false;
   }
@@ -65,12 +56,10 @@ class Game {
    * @returns {{imgX: number, imgY: number, canPlay: boolean, x: number, y: number, id: string, moveTo(number, number): void}[]}
    */
   getBoard() {
-    return this.puzzle.map(
-      /** @param {PuzzlePiece} piece */ (piece) => ({
-        ...piece,
-        canPlay: this.canPlay(piece.x, piece.y),
-      })
-    );
+    return this.puzzle.map((piece) => ({
+      ...piece,
+      canPlay: this.canPlay(piece.x, piece.y),
+    }));
   }
 
   /**
@@ -109,9 +98,9 @@ class Game {
 
   /**
    * Determines if the piece at a given column and row can currently be played
-   * @param {number} x - column of the piece to check
-   * @param {number} y - row of the piece to check
-   * @returns {boolean} true if the piece can be played, false otherwise
+    column of the piece to check
+    row of the piece to check
+    true if the piece can be played, false otherwise
    */
   canPlay(x, y) {
     // if the game is not started, no piece can be moved,
@@ -130,8 +119,8 @@ class Game {
 
   /**
    * Plays the piece at the given column and row
-   * @param {number} x - column of the piece to move
-   * @param {number} y - row of the piece to move
+    column of the piece to move
+    row of the piece to move
    */
   play(x, y) {
     if (this.move(x, y)) {
@@ -143,9 +132,9 @@ class Game {
 
   /**
    * Moves a given piece of the puzzle (when played or shuffled)
-   * @param {number} x - column of the piece to move
-   * @param {number} y - row of the piece to move
-   * @returns {boolean} true if the piece was moved and false otherwise
+   * column of the piece to move
+   * row of the piece to move
+   * true if the piece was moved and false otherwise
    */
   move(x, y) {
     if (!this.canPlay(x, y)) {
@@ -220,9 +209,8 @@ class Game {
 
   /**
    * Returns the list of pieces of the puzzle that can currently be played
-   * @param {?PuzzlePiece} [excludePiece] - optional piece to exclude of the list
-   * @returns {PuzzlePiece[]}
-   */
+   optional piece to exclude of the list
+  */
   possibleMoves(excludePiece = null) {
     return this.puzzle.filter(
       ({ x, y, id }) => this.canPlay(x, y) && id !== excludePiece?.id
@@ -235,7 +223,7 @@ class Game {
    * as some combinations of pieces layout can result in a puzzle that has no solution.
    * That is why we start with the solved puzzle and move one piece at the time, to be sure
    * that the resulting positions form a game that can be won.
-   * @param {number} [rounds] number of random moves to make to shuffle the game
+   number of random moves to make to shuffle the game
    */
   shuffle(rounds = 1000) {
     let possibleMoves = [];

@@ -1,21 +1,7 @@
 import { useContext } from "react";
 import { GameContext } from "../../store/GameContext";
 
-/**
- * Individual square puzzle piece
- * @param {number} x - x current position of the piece ( number of the column range 0..size.x-1)
- * @param {number} y - y current position of the piece (number of row range 0..size.y-1)
- * @param {number} imgX - x position of the piece once puzzle solved (range 0..size.x-1)
- * @param {number} imgY - y position og the piece once puzzle solved (range 0..size.y-1
- * @param {boolean} canPlay - true if the piece can be moved
- * @param {number} cellSize - size in pixelated of the piece square
- * @returns {JSX.Element|null}
- * @constructor
- */
 const BoardCell = ({ x, y, imgX, imgY, canPlay = false, cellSize }) => {
-  /**
-   * @type {import('../../store/GameContext').GameContextType}
-   */
   const { play, size, puzzleImage } = useContext(GameContext);
 
   // the puzzle image is not defined upon first render

@@ -9,7 +9,7 @@ const FoundationLayout = ({ children }) => {
   return (
     <div className="bg-center">
       <div className="bg-gradient-to-br from-[#fd2a] to-[#03da] min-h-screen flex items-center justify-center">
-        <div className="flex flex-col md:flex-row gap-6 p-4 bg-[#daf4] rounded-lg">
+        <div className="flex flex-col md:flex-row gap-6 p-4 rounded-lg">
           {children}
         </div>
       </div>
